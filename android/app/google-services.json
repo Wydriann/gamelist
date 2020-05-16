@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "350091418792",
+    "firebase_url": "https://gamelist-8a221.firebaseio.com",
+    "project_id": "gamelist-8a221",
+    "storage_bucket": "gamelist-8a221.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:350091418792:android:526445da157c3e57b8f69d",
+        "android_client_info": {
+          "package_name": "urt.edu.br"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "350091418792-ifov4dkgfi2gc0e8a1brjs5j5v0kdpo9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD_B-ANGUr4KMB4D5j_2GVJHLKM55j_syM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "350091418792-ifov4dkgfi2gc0e8a1brjs5j5v0kdpo9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
