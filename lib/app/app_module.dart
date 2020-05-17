@@ -4,6 +4,8 @@ import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:flutter/material.dart';
 import 'package:gamelist/app/app_widget.dart';
 
+import 'modules/genres/genres_repository.dart';
+
 class AppModule extends ModuleWidget {
   @override
   List<Bloc> get blocs => [
@@ -12,7 +14,10 @@ class AppModule extends ModuleWidget {
       ];
 
   @override
-  List<Dependency> get dependencies => [];
+  List<Dependency> get dependencies => [
+
+    Dependency((i) => GenresRepository()),
+  ];
 
   @override
   Widget get view => AppWidget();

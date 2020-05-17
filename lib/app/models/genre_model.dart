@@ -6,8 +6,11 @@ class Genre extends BaseModel {
   static const String COLLECTION_NAME = 'Genres';
   static const String NOME = "nome";
   String _documentId;
-
   String nome;
+
+
+  Genre();
+
 
   @override
   String documentId() {
