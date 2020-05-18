@@ -10,8 +10,8 @@ class GenresRepository extends Disposable {
 
    void add(Genre _genre) => _collection.add(_genre.toMap()); 
 
-   void update(String _documentId, Genre _genre) => 
-   _collection.document(_documentId).updateData(_genre.toMap());
+   void update(String _documentId, Genre _genres) =>
+      _collection.document(_documentId).updateData(_genres.toMap());
 
    void delete(String _documentId) => _collection.document(_documentId).delete();
 

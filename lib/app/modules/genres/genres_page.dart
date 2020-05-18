@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gamelist/app/utils/main_drawer.dart';
+import 'package:gamelist/app/modules/genres/genre_edit_page.dart';
 
 import '../../models/genre_model.dart';
 import 'genres_bloc.dart';
@@ -25,6 +26,17 @@ class _GenresPageState extends State<GenresPage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: () {
+          var _genres = Genre()..nome = "";
+
+          Navigator.push(
+            context, 
+            MaterialPageRoute(builder: (context) => GenreEditPage(_genres))
+            );
+        },
+        ),
       body: Container(
         child: StreamBuilder<List<Genre>>(
           stream: _bloc.getGenres,
@@ -37,12 +49,20 @@ class _GenresPageState extends State<GenresPage> {
                   (_genres) {
                     return Dismissible(
                     key: Key(_genres.documentId()), 
-                    onDismissed: null,
+                    onDismissed: (direction) {
+                      _bloc.delete(_genres.documentId());
+                    },
                     child: ListTile(
                       title: Text(_genres.nome),
                       trailing: Icon(Icons.arrow_right),
-                      onTap: null,
-                    ),
+                      onTap: (){
+                        Navigator.push(
+                          context, 
+                          MaterialPageRoute(
+                            builder: (context) => GenreEditPage(_genres),
+                          ),
+                        );
+                      },),
                    );
                 },
                 ).toList(),

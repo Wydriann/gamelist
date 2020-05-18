@@ -18,7 +18,7 @@ class AppWidget extends StatelessWidget {
       },
       title: 'Flutter Slidy',
       theme: ThemeData(
-        primarySwatch: Colors.yellow,
+        primarySwatch: Colors.blue,
       ),
       home: StreamBuilder<Object>(
         stream: FirebaseAuth.instance.onAuthStateChanged,
