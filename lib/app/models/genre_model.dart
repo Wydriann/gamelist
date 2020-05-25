@@ -29,7 +29,7 @@ class Genre extends BaseModel {
   toMap() {
     var map = new Map<String, dynamic>();
     map['nome'] = this.nome;
-
+  return map;
 
   }
 
