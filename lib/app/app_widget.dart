@@ -4,6 +4,7 @@ import 'package:gamelist/app/modules/home/home_module.dart';
 import 'package:gamelist/app/modules/logon/logon_page.dart';
 import 'package:gamelist/app/utils/routes.dart';
 
+import 'modules/games/games_page.dart';
 import 'modules/genres/genres_page.dart';
 import 'modules/home/home_page.dart';
 import 'utils/routes.dart';
@@ -15,6 +16,7 @@ class AppWidget extends StatelessWidget {
       routes: {
         Routes.home: (context) => HomePage(),
         Routes.genre: (context) => GenresPage(),
+        Routes.games: (context) => GamesPage(),
       },
       title: 'Flutter Slidy',
       theme: ThemeData(

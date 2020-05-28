@@ -1,0 +1,4 @@
+lib/app/modules/games/games_page.dart
+test/app/modules/games/games_page_test.dart
+lib/app/modules/games/games_bloc.dart
+test/app/modules/games/games_bloc_test.dart

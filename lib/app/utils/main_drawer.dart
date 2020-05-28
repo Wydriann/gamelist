@@ -12,7 +12,7 @@ class MainDrawer extends StatelessWidget {
       child: ListView(
         children: <Widget>[
           _addDrawerItem(
-            Icons.games,
+            Icons.home,
              "Home",
                () => Navigator.pushReplacementNamed(context, Routes.home)),
           _addDrawerItem(
@@ -20,9 +20,10 @@ class MainDrawer extends StatelessWidget {
              "Gêneros",
                () => Navigator.pushReplacementNamed(context, Routes.genre)),
           _addDrawerItem(
-            Icons.phonelink,
-             "Plataformas",
-               null
+            // phonelink
+            Icons.games,
+             "Games",
+               () => Navigator.pushReplacementNamed(context, Routes.games),
           ),
         ],
       ),
