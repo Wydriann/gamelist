@@ -17,6 +17,8 @@ class AppWidget extends StatelessWidget {
         Routes.home: (context) => HomePage(),
         Routes.genre: (context) => GenresPage(),
         Routes.games: (context) => GamesPage(),
+        Routes.logon: (context) => LogonPage(),
+
       },
       title: 'Flutter Slidy',
       theme: ThemeData(

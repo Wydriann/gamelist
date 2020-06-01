@@ -29,6 +29,7 @@ class GamesBloc extends BlocBase {
   // genreId
   var _genreIdController = BehaviorSubject<String>();
   Stream<String> get outGenreId => _genreIdController.stream; 
+  String get outGenreIdValue => _genreIdController.stream.value; 
   void setGenreId(String value) => _genreIdController.sink.add(value);
 
   // plataform 

@@ -5,6 +5,9 @@ final FirebaseAuth _auth = FirebaseAuth.instance;
 
 class LogonPage extends StatefulWidget {
   final String title;
+  static const String route = '/logon';
+
+
   const LogonPage({Key key, this.title = "Logon"}) : super(key: key);
 
   @override

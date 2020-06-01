@@ -3,6 +3,7 @@ import 'package:gamelist/app/models/games_model..dart';
 import 'package:gamelist/app/utils/main_drawer.dart';
 import 'package:intl/intl.dart';
 import 'games_bloc.dart';
+import 'package:gamelist/app/modules/games/games_edit_page.dart';
 
 class GamesPage extends StatefulWidget {
   final String title;
@@ -39,8 +40,7 @@ class _GamesPageState extends State<GamesPage> {
           Navigator.push(
             context, 
             MaterialPageRoute(
-              //builder: (context) => GamesEditPage(_games),
-              builder: (context) => null,
+              builder: (context) => GamesEditPage(_games),
               ),
             );
         },
@@ -62,15 +62,14 @@ class _GamesPageState extends State<GamesPage> {
                     },
                     child: ListTile(
                       title: Text(_games.nome),
-                    //  subtitle: Text(new DateFormat("dd-MM-yyyy")
-                       // .format(_games.data)),
+                      subtitle: Text(new DateFormat("dd-MM-yyyy")
+                        .format(_games.data),),
                       trailing: Icon(Icons.arrow_right),
                       onTap: () {
                         Navigator.push(
                           context, 
                           MaterialPageRoute(
-                            //builder: (context) => GenreEditPage(_games),
-                            builder: (context) => null,
+                            builder: (context) => GamesEditPage(_games),
                           ),
                         );
                       },),
