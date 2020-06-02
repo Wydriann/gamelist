@@ -50,11 +50,49 @@ class _HomePageState extends State<HomePage> {
           },),
         ],
       ),
-      body: Column(
-        children: <Widget>[],
+      body: _body(),
+    );
+  }
+
+  _body() {
+    return SingleChildScrollView(
+      child: Container(
+        width: 500,
+        color: Colors.grey[400],
+        child: Column(
+      children: <Widget>[
+        _inf("assets/images/HK1.jpg"),
+        _img("assets/images/ORI1.jpg"),    
+      ],
+      ),
+    ),
+    );
+  }
+  _img (String img) {
+  return Image.asset(img,
+    width: 400,
+    height: 400,
+  );
+  }
+
+  _inf (String img) {
+    return Container(
+      width: 500,
+      height: 400,
+      color: Colors.grey[400],
+      child: Container(
+        child: Column( 
+          children: <Widget>[
+            _img(img),
+          ],
+      ),
       ),
     );
   }
+  _text(String text) {
+    return Text(text);
+  }
+
 }
 
 

@@ -6,6 +6,7 @@ import 'package:gamelist/app/app_widget.dart';
 
 import 'modules/games/games_repository.dart';
 import 'modules/genres/genres_repository.dart';
+import 'modules/plataform/plataforms_repository.dart';
 
 class AppModule extends ModuleWidget {
   @override
@@ -16,9 +17,9 @@ class AppModule extends ModuleWidget {
 
   @override
   List<Dependency> get dependencies => [
-
     Dependency((i) => GenresRepository()),
     Dependency((i) => GamesRepository()),
+    Dependency((i) => PlataformsRepository()),
   ];
 
   @override

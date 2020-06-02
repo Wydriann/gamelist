@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gamelist/app/models/games_model..dart';
+import 'package:gamelist/app/models/plataforms_model.dart';
 import 'package:gamelist/app/modules/genres/genres_bloc.dart';
+import 'package:gamelist/app/modules/plataform/plataforms_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:gamelist/app/models/genre_model.dart';
 
@@ -19,10 +21,11 @@ class GamesEditPage extends StatefulWidget {
 class _GamesEditPageState extends State<GamesEditPage> {
   TextEditingController _nomeController;
   TextEditingController _playedHoursController;
-  TextEditingController _plataformController;
+  TextEditingController _plataformsController;
 
   final _bloc = GamesBloc();
   final _blocGenres = GenresBloc();
+  final _blocPlataforms = PlataformsBloc();
   final _dateFormat = DateFormat("dd/MM/yyy");
 
   @override
@@ -55,13 +58,6 @@ class _GamesEditPageState extends State<GamesEditPage> {
                   decoration: InputDecoration(labelText: "Melhor Tempo"),
                   controller: _playedHoursController,
                   onChanged: _bloc.setPlayedHours,
-                ),
-              ),
-              Container(
-                child: TextField(
-                  decoration: InputDecoration(labelText: "Plataforma"),
-                  controller: _plataformController,
-                  onChanged: _bloc.setPlataform,
                 ),
               ),
               
@@ -125,6 +121,45 @@ class _GamesEditPageState extends State<GamesEditPage> {
                     ),
                 ),
               ),
+
+
+              Container(
+                child: InputDecorator( 
+                  decoration: InputDecoration( 
+                    labelText: "Plataformas",
+                  ),
+                  child: StreamBuilder<List<Plataforms>>(
+                    stream: _blocPlataforms.getPlataforms,
+                    builder: (context, snapshotPlataforms){
+                      var _plataforms = _bloc.outPlataformsValue;
+
+                      if (!snapshotPlataforms.hasData) return CircularProgressIndicator();
+
+                      return DropdownButton<String>(
+                        value: _plataforms,
+                        isExpanded: true,
+                        items: 
+                           snapshotPlataforms.data.map((Plataforms _plataforms){
+                          return DropdownMenuItem<String>(
+                            value: _plataforms.documentId(),
+                            child: Text(_plataforms.nome),
+                          );
+                        }).toList(),
+                        onChanged: (String plataforms){
+                          setState(() {                            
+                          _plataforms = plataforms;
+                          _bloc.setPlataforms(plataforms);
+                          });
+
+                        },
+
+                      );
+                    },
+                    ),
+                ),
+              ),
+
+
               Container(height: 6),
               RaisedButton(
                 child: Text("Salvar"),

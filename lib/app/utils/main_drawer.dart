@@ -20,10 +20,14 @@ class MainDrawer extends StatelessWidget {
              "Gêneros",
                () => Navigator.pushReplacementNamed(context, Routes.genre)),
           _addDrawerItem(
-            // phonelink
             Icons.games,
              "Games",
                () => Navigator.pushReplacementNamed(context, Routes.games),
+          ),
+          _addDrawerItem(
+            Icons.phonelink,
+             "Plataformas",
+               () => Navigator.pushReplacementNamed(context, Routes.plataforms),
           ),
         ],
       ),

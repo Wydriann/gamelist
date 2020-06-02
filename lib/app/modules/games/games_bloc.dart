@@ -16,7 +16,7 @@ class GamesBloc extends BlocBase {
   GamesBloc() {
     _nomeController.listen((value) => _nome = value);
     _genreIdController.listen((value) => _genreId = value);
-    _plataformController.listen((value) => _plataform = value);
+    _plataformsController.listen((value) => _plataform = value);
     _playedHoursController.listen((value) => _playedHours = value);
     _dataController.listen((value) => _data = value);
   
@@ -33,9 +33,10 @@ class GamesBloc extends BlocBase {
   void setGenreId(String value) => _genreIdController.sink.add(value);
 
   // plataform 
-  var _plataformController = BehaviorSubject<String>();
-  Stream<String> get outPlataform => _plataformController.stream; 
-  void setPlataform(String value) => _plataformController.sink.add(value);
+  var _plataformsController = BehaviorSubject<String>();
+  Stream<String> get outPlataforms => _plataformsController.stream; 
+  String get outPlataformsValue => _plataformsController.stream.value;
+  void setPlataforms(String value) => _plataformsController.sink.add(value);
 
   // playedHours 
   var _playedHoursController = BehaviorSubject<String>();
@@ -55,7 +56,7 @@ class GamesBloc extends BlocBase {
     _documentId = games.documentId();
     setNome(games.nome);    
     setGenreId(games.genreId);  
-    setPlataform(games.plataform);  
+    setPlataforms(games.plataform);  
     setPlayedHours(games.playedHours);  
     setData(games.data);  
   }

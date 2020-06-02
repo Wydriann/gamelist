@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gamelist/app/modules/home/home_module.dart';
 import 'package:gamelist/app/modules/logon/logon_page.dart';
+import 'package:gamelist/app/modules/plataform/plataforms_page.dart';
 import 'package:gamelist/app/utils/routes.dart';
 
 import 'modules/games/games_page.dart';
@@ -18,6 +19,7 @@ class AppWidget extends StatelessWidget {
         Routes.genre: (context) => GenresPage(),
         Routes.games: (context) => GamesPage(),
         Routes.logon: (context) => LogonPage(),
+        Routes.plataforms: (context) => PlataformsPage(),
 
       },
       title: 'Flutter Slidy',
