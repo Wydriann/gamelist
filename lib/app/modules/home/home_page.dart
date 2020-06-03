@@ -8,7 +8,7 @@ class HomePage extends StatefulWidget {
 
   static const String route = '/home';
 
-  const HomePage({Key key, this.title = "Home"}) : super(key: key);
+  const HomePage({Key key, this.title = "Home / Sinopses"}) : super(key: key);
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -51,49 +51,42 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      body: _body(),
-    );
-  }
-
-  _body() {
-    return SingleChildScrollView(
-      child: Container(
-        width: 500,
-        color: Colors.grey[400],
-        child: Column(
-          children: <Widget>[
-            _inf("assets/images/HK1.jpg"),
-            _img("assets/images/ORI1.jpg"),
-          ],
+      body: SingleChildScrollView(
+        child:  Container(
+        child: Center(
+          child: Column(
+            children: <Widget>[
+              Card(
+              color: Colors.grey[300], 
+              child: Container(
+                padding: EdgeInsets.all(20.0),
+                child: Column(
+                  children: <Widget>[
+                    Image.asset("assets/images/ORI1.jpg"),
+                    Divider(),
+                    Text('\tEm Ori and the Blind Forest, o jogador controla um guardião espiritual feito de luz chamado Ori, um dos muitos filhos da Árvore do Espírito, que protegia a floresta de Nibel.\n\tDurante uma tempestade, Ori se desprende da árvore e se perde na floresta, quando é encontrado e adotado por uma criatura chamada Naru.'),
+                  ],
+                ),
+              ),
+            ),
+            Card(
+              color: Colors.grey[300], 
+              child: Container(
+                padding: EdgeInsets.all(20.0),
+                child: Column(
+                  children: <Widget>[
+                    Image.asset("assets/images/HK2.jpg"),
+                    Divider(),
+                    Text('\tHollow Knight é um jogo indie desenvolvido pela iniciante Team Cherry, uma desenvolvedora australiana com apenas três pessoas. ... Formado pela mistura equilibrada de plataforma e combate, este jogo ganhou por merecer o apelido de Dark Souls indie, oferecendo ao jogador uma experiência desafiadora e extremamente prazerosa'),
+                  ],
+                ),
+              ),
+            ),
+            ],
+          ),
         ),
       ),
-    );
-  }
-
-  _img(String img) {
-    return Image.asset(
-      img,
-      width: 400,
-      height: 400,
-    );
-  }
-
-  _inf(String img) {
-    return Container(
-      width: 500,
-      height: 400,
-      color: Colors.grey[400],
-      child: Container(
-        child: Column(
-          children: <Widget>[
-            _img(img),
-          ],
-        ),
       ),
     );
-  }
-
-  _text(String text) {
-    return Text(text);
   }
 }

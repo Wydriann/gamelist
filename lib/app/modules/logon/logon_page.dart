@@ -32,7 +32,7 @@ final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Container(
-            child: const Text('Test sign in with email and password'),
+            child: const Text('Entre com seu Email e Senha'),
             padding: const EdgeInsets.all(16),
             alignment: Alignment.center,
           ),
@@ -48,7 +48,7 @@ final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
           ),
           TextFormField(
             controller: _passwordController,
-            decoration: const InputDecoration(labelText: 'Password'),
+            decoration: const InputDecoration(labelText: 'Senha'),
             validator: (String value) {
               if (value.isEmpty) {
                 return 'Please enter some text';
@@ -65,7 +65,7 @@ final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
                   _signInWithEmailAndPassword();
                 }
               },
-              child: const Text('Submit'),
+              child: const Text('Entrar'),
             ),
           ),
           Container(
@@ -75,9 +75,9 @@ final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
               _success == null
                   ? ''
                   : (_success
-                      ? 'Successfully signed in ' + _userEmail
-                      : 'Sign in failed'),
-              style: TextStyle(color: Colors.yellow),
+                      ? 'Sucesso Login em ' + _userEmail
+                      : 'Falha de Login'),
+              style: TextStyle(color: Colors.black),
             ),
           )
         ],
