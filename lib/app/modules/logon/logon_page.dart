@@ -7,7 +7,6 @@ class LogonPage extends StatefulWidget {
   final String title;
   static const String route = '/logon';
 
-
   const LogonPage({Key key, this.title = "Logon"}) : super(key: key);
 
   @override
@@ -15,84 +14,109 @@ class LogonPage extends StatefulWidget {
 }
 
 class _LogonPageState extends State<LogonPage> {
-final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   bool _success;
   String _userEmail;
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
-      appBar: AppBar(title: Text('Logon'),
-      ),
+      appBar: AppBar(title: Text('Logon')),
       body: Form(
-      key: _formKey,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Container(
-            child: const Text('Entre com seu Email e Senha'),
-            padding: const EdgeInsets.all(16),
-            alignment: Alignment.center,
-          ),
-          TextFormField(
-            controller: _emailController,
-            decoration: const InputDecoration(labelText: 'Email'),
-            validator: (String value) {
-              if (value.isEmpty) {
-                return 'Please enter some text';
-              }
-              return null;
-            },
-          ),
-          TextFormField(
-            controller: _passwordController,
-            decoration: const InputDecoration(labelText: 'Senha'),
-            validator: (String value) {
-              if (value.isEmpty) {
-                return 'Please enter some text';
-              }
-              return null;
-            },
-          ),
-          Container(
-            padding: const EdgeInsets.symmetric(vertical: 16.0),
-            alignment: Alignment.center,
-            child: RaisedButton(
-              onPressed: () async {
-                if (_formKey.currentState.validate()) {
-                  _signInWithEmailAndPassword();
+        key: _formKey,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Container(
+              child: const Text('Entre com seu Email e Senha'),
+              padding: const EdgeInsets.all(16),
+              alignment: Alignment.center,
+            ),
+            TextFormField(
+              controller: _emailController,
+              decoration: const InputDecoration(labelText: 'Email'),
+              validator: (String value) {
+                if (value.isEmpty) {
+                  return 'Digite um valor de Email valido';
                 }
+                return null;
               },
-              child: const Text('Entrar'),
             ),
-          ),
-          Container(
-            alignment: Alignment.center,
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Text(
-              _success == null
-                  ? ''
-                  : (_success
-                      ? 'Sucesso Login em ' + _userEmail
-                      : 'Falha de Login'),
-              style: TextStyle(color: Colors.black),
+            TextFormField(
+              controller: _passwordController,
+              decoration: const InputDecoration(labelText: 'Senha'),
+              validator: (String value) {
+                if (value.isEmpty) {
+                  return 'Digite uma Senha valida';
+                }
+                return null;
+              },
             ),
-          )
-        ],
+            Container(
+              padding: const EdgeInsets.symmetric(vertical: 16.0),
+              alignment: Alignment.center,
+              child: RaisedButton(
+                onPressed: () async {
+                  if (_formKey.currentState.validate()) {
+                    _signInWithEmailAndPassword();
+                  }
+                },
+                child: const Text('Entrar'),
+              ),
+            ),
+            Container(
+              alignment: Alignment.center,
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Text(
+                _success == null
+                    ? ''
+                    : (_success
+                        ? 'Sucesso em ' + _userEmail
+                        : 'Usuário ou senha invalida'),
+                style: TextStyle(color: Colors.red),
+              ),
+            )
+          ],
+        ),
       ),
-    ),
     );
   }
 
   // Example code of how to sign in with email and password.
   void _signInWithEmailAndPassword() async {
-    final FirebaseUser user = (await _auth.signInWithEmailAndPassword(
-      email: _emailController.text,
-      password: _passwordController.text,
-    ))
-        .user;
+    FirebaseUser user;
+    try {
+      user = (await _auth.signInWithEmailAndPassword(
+        email: _emailController.text,
+        password: _passwordController.text,
+      ))
+          .user;
+    } catch (error) {
+      var msg = error.toString();
+      if (error.code == "ERROR_WRONG_PASSWORD") {
+        msg = "Senha Inválida!";
+      }
+
+      showDialog(
+        builder: (context) {
+          return AlertDialog(
+            title: new Text("Erro"),
+            content: new Text(msg),
+            actions: <Widget>[
+              FlatButton(
+                child: new Text("OK"),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+        context: context,
+      );
+    }
+
     if (user != null) {
       setState(() {
         _success = true;
