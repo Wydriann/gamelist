@@ -8,7 +8,7 @@ import '../../app_module.dart';
 class GamesBloc extends BlocBase {
   var _repository = AppModule.to.getDependency<GamesRepository>();
   String _documentId;
-  String _nome, _genreId, _plataform, _playedHours;
+  String _nome, _genreId, _plataforms, _playedHours;
   DateTime _data; 
 
 
@@ -16,7 +16,7 @@ class GamesBloc extends BlocBase {
   GamesBloc() {
     _nomeController.listen((value) => _nome = value);
     _genreIdController.listen((value) => _genreId = value);
-    _plataformsController.listen((value) => _plataform = value);
+    _plataformsController.listen((value) => _plataforms = value);
     _playedHoursController.listen((value) => _playedHours = value);
     _dataController.listen((value) => _data = value);
   
@@ -56,7 +56,7 @@ class GamesBloc extends BlocBase {
     _documentId = games.documentId();
     setNome(games.nome);    
     setGenreId(games.genreId);  
-    setPlataforms(games.plataform);  
+    setPlataforms(games.plataforms);  
     setPlayedHours(games.playedHours);  
     setData(games.data);  
   }
@@ -65,7 +65,7 @@ class GamesBloc extends BlocBase {
     var _games = Games()
     ..nome = _nome
     ..genreId = _genreId
-    ..plataform = _plataform
+    ..plataforms = _plataforms
     ..playedHours = _playedHours
     ..data = _data;
 

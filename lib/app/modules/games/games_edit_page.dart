@@ -32,6 +32,7 @@ class _GamesEditPageState extends State<GamesEditPage> {
   void initState() {
     _bloc.setGames(widget.games);
     _nomeController = TextEditingController(text: widget.games.nome);
+    _playedHoursController = TextEditingController(text: widget.games.playedHours);
     super.initState();
   }
 
@@ -94,7 +95,10 @@ class _GamesEditPageState extends State<GamesEditPage> {
                   child: StreamBuilder<List<Genre>>(
                     stream: _blocGenres.getGenres,
                     builder: (context, snapshotGenres){
-                      var _genresId = _bloc.outGenreIdValue;
+                      var _genresId = _bloc.outGenreIdValue == null ||
+                        _bloc.outGenreIdValue == ""
+                      ? snapshotGenres.data.first.documentId()
+                      : _bloc.outGenreIdValue;
 
                       if (!snapshotGenres.hasData) return CircularProgressIndicator();
 
@@ -131,7 +135,10 @@ class _GamesEditPageState extends State<GamesEditPage> {
                   child: StreamBuilder<List<Plataforms>>(
                     stream: _blocPlataforms.getPlataforms,
                     builder: (context, snapshotPlataforms){
-                      var _plataforms = _bloc.outPlataformsValue;
+                      var _plataforms = _bloc.outPlataformsValue == null ||
+                      _bloc.outPlataformsValue == ""
+                      ? snapshotPlataforms.data.first.documentId()
+                      : _bloc.outPlataformsValue;
 
                       if (!snapshotPlataforms.hasData) return CircularProgressIndicator();
 

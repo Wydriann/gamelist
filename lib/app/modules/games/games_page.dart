@@ -33,7 +33,7 @@ class _GamesPageState extends State<GamesPage> {
           var _games = Games()
           ..nome = ""
           ..genreId = ""
-          ..plataform = ""
+          ..plataforms = ""
           ..playedHours = "" 
           ..data = DateTime.now();
 

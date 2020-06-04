@@ -29,6 +29,11 @@ class MainDrawer extends StatelessWidget {
              "Plataformas",
                () => Navigator.pushReplacementNamed(context, Routes.plataforms),
           ),
+          _addDrawerItem(
+            Icons.wallpaper,
+             "Wallpapers",
+               () => Navigator.pushReplacementNamed(context, Routes.wallpapers),
+          ),
         ],
       ),
     );

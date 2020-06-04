@@ -4,6 +4,7 @@ import 'package:gamelist/app/modules/home/home_module.dart';
 import 'package:gamelist/app/modules/logon/logon_page.dart';
 import 'package:gamelist/app/modules/plataform/plataforms_page.dart';
 import 'package:gamelist/app/utils/routes.dart';
+import 'package:gamelist/app/modules/wallpapers/wallpapers_page.dart';
 
 import 'modules/games/games_page.dart';
 import 'modules/genres/genres_page.dart';
@@ -20,6 +21,7 @@ class AppWidget extends StatelessWidget {
         Routes.games: (context) => GamesPage(),
         Routes.logon: (context) => LogonPage(),
         Routes.plataforms: (context) => PlataformsPage(),
+        Routes.wallpapers: (context) => WallpapersPage(),
 
       },
       title: 'Flutter Slidy',

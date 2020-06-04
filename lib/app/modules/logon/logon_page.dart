@@ -24,16 +24,14 @@ class _LogonPageState extends State<LogonPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Logon'),
-      ),
+      appBar: AppBar(title: Text('Logon')),
       body: Form(
         key: _formKey,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Container(
-              child: const Text('Test sign in with email and password'),
+              child: const Text('Entre com seu Email e Senha'),
               padding: const EdgeInsets.all(16),
               alignment: Alignment.center,
             ),
@@ -42,17 +40,17 @@ class _LogonPageState extends State<LogonPage> {
               decoration: const InputDecoration(labelText: 'Email'),
               validator: (String value) {
                 if (value.isEmpty) {
-                  return 'Please enter some text';
+                  return 'Digite um valor de Email valido';
                 }
                 return null;
               },
             ),
             TextFormField(
               controller: _passwordController,
-              decoration: const InputDecoration(labelText: 'Password'),
+              decoration: const InputDecoration(labelText: 'Senha'),
               validator: (String value) {
                 if (value.isEmpty) {
-                  return 'Please enter some text';
+                  return 'Digite uma Senha valida';
                 }
                 return null;
               },
@@ -63,11 +61,10 @@ class _LogonPageState extends State<LogonPage> {
               child: RaisedButton(
                 onPressed: () async {
                   if (_formKey.currentState.validate()) {
-                    await _signInWithEmailAndPassword(context);
-                    Navigator.pushReplacementNamed(context, Routes.home);
+                    _signInWithEmailAndPassword();
                   }
                 },
-                child: const Text('Submit'),
+                child: const Text('Entrar'),
               ),
             ),
             Container(
@@ -77,9 +74,9 @@ class _LogonPageState extends State<LogonPage> {
                 _success == null
                     ? ''
                     : (_success
-                        ? 'Successfully signed in ' + _userEmail
-                        : 'Sign in failed'),
-                style: TextStyle(color: Colors.yellow),
+                        ? 'Sucesso em ' + _userEmail
+                        : 'Usuário ou senha invalida'),
+                style: TextStyle(color: Colors.red),
               ),
             )
           ],
@@ -89,12 +86,39 @@ class _LogonPageState extends State<LogonPage> {
   }
 
   // Example code of how to sign in with email and password.
-  _signInWithEmailAndPassword(BuildContext context) async {
-    final FirebaseUser user = (await _auth.signInWithEmailAndPassword(
-      email: _emailController.text,
-      password: _passwordController.text,
-    ))
-        .user;
+  void _signInWithEmailAndPassword() async {
+    FirebaseUser user;
+    try {
+      user = (await _auth.signInWithEmailAndPassword(
+        email: _emailController.text,
+        password: _passwordController.text,
+      ))
+          .user;
+    } catch (error) {
+      var msg = error.toString();
+      if (error.code == "ERROR_WRONG_PASSWORD") {
+        msg = "Senha Inválida!";
+      }
+
+      showDialog(
+        builder: (context) {
+          return AlertDialog(
+            title: new Text("Erro"),
+            content: new Text(msg),
+            actions: <Widget>[
+              FlatButton(
+                child: new Text("OK"),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+        context: context,
+      );
+    }
+
     if (user != null) {
       setState(() {
         _success = true;
