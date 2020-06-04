@@ -31,19 +31,8 @@ class _HomePageState extends State<HomePage> {
                   FirebaseAuth _auth = FirebaseAuth.instance;
                   final FirebaseUser user =
                       await FirebaseAuth.instance.currentUser();
-                  if (user == null) {
-                    Scaffold.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text("Ninguem logado."),
-                      ),
-                    );
-                    return;
-                  }
                   await _auth.signOut();
-                  final String uid = user.uid;
-                  Scaffold.of(builderContext).showSnackBar(SnackBar(
-                    content: Text(uid + 'Saiu com Sucesso'),
-                  ));
+
                   Navigator.pushReplacementNamed(context, Routes.logon);
                 },
               );
