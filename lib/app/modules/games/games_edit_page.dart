@@ -32,7 +32,8 @@ class _GamesEditPageState extends State<GamesEditPage> {
   void initState() {
     _bloc.setGames(widget.games);
     _nomeController = TextEditingController(text: widget.games.nome);
-    _playedHoursController = TextEditingController(text: widget.games.playedHours);
+    _playedHoursController =
+        TextEditingController(text: widget.games.playedHours);
     super.initState();
   }
 
@@ -54,14 +55,13 @@ class _GamesEditPageState extends State<GamesEditPage> {
                   onChanged: _bloc.setNome,
                 ),
               ),
-               Container(
+              Container(
                 child: TextField(
                   decoration: InputDecoration(labelText: "Melhor Tempo"),
                   controller: _playedHoursController,
                   onChanged: _bloc.setPlayedHours,
                 ),
               ),
-              
               Container(
                 height: 6,
               ),
@@ -69,7 +69,7 @@ class _GamesEditPageState extends State<GamesEditPage> {
                 stream: _bloc.outData,
                 initialData: DateTime.now(),
                 builder: (context, snapshot) {
-                   if (!snapshot.hasData) return CircularProgressIndicator();
+                  if (!snapshot.hasData) return CircularProgressIndicator();
 
                   return InkWell(
                     onTap: () => _inputData(context, snapshot.data),
@@ -88,85 +88,82 @@ class _GamesEditPageState extends State<GamesEditPage> {
                 },
               ),
               Container(
-                child: InputDecorator( 
-                  decoration: InputDecoration( 
+                child: InputDecorator(
+                  decoration: InputDecoration(
                     labelText: "Gênero do Game",
                   ),
                   child: StreamBuilder<List<Genre>>(
                     stream: _blocGenres.getGenres,
-                    builder: (context, snapshotGenres){
+                    builder: (context, snapshotGenres) {
                       var _genresId = _bloc.outGenreIdValue == null ||
-                        _bloc.outGenreIdValue == ""
-                      ? snapshotGenres.data.first.documentId()
-                      : _bloc.outGenreIdValue;
+                              _bloc.outGenreIdValue == ""
+                          ? (snapshotGenres.data == null
+                              ? ""
+                              : snapshotGenres.data.first.documentId())
+                          : _bloc.outGenreIdValue;
 
-                      if (!snapshotGenres.hasData) return CircularProgressIndicator();
+                      if (!snapshotGenres.hasData)
+                        return CircularProgressIndicator();
 
                       return DropdownButton<String>(
                         value: _genresId,
                         isExpanded: true,
-                        items: 
-                           snapshotGenres.data.map((Genre _genres){
+                        items: snapshotGenres.data.map((Genre _genres) {
                           return DropdownMenuItem<String>(
                             value: _genres.documentId(),
-                            child: Text(_genres.nome ),
+                            child: Text(_genres.nome),
                           );
                         }).toList(),
-                        onChanged: (String genresId){
-                          setState(() {                            
-                          _genresId = genresId;
-                          _bloc.setGenreId(genresId);
+                        onChanged: (String genresId) {
+                          setState(() {
+                            _genresId = genresId;
+                            _bloc.setGenreId(genresId);
                           });
-
                         },
-
                       );
                     },
-                    ),
+                  ),
                 ),
               ),
-
-
               Container(
-                child: InputDecorator( 
-                  decoration: InputDecoration( 
+                child: InputDecorator(
+                  decoration: InputDecoration(
                     labelText: "Plataformas",
                   ),
                   child: StreamBuilder<List<Plataforms>>(
                     stream: _blocPlataforms.getPlataforms,
-                    builder: (context, snapshotPlataforms){
+                    builder: (context, snapshotPlataforms) {
                       var _plataforms = _bloc.outPlataformsValue == null ||
-                      _bloc.outPlataformsValue == ""
-                      ? snapshotPlataforms.data.first.documentId()
-                      : _bloc.outPlataformsValue;
+                              _bloc.outPlataformsValue == ""
+                          ? (snapshotPlataforms.data == null
+                              ? ""
+                              : snapshotPlataforms.data.first.documentId())
+                          : _bloc.outPlataformsValue;
 
-                      if (!snapshotPlataforms.hasData) return CircularProgressIndicator();
+                      if (!snapshotPlataforms.hasData)
+                        return CircularProgressIndicator();
 
                       return DropdownButton<String>(
                         value: _plataforms,
                         isExpanded: true,
-                        items: 
-                           snapshotPlataforms.data.map((Plataforms _plataforms){
+                        items: snapshotPlataforms.data
+                            .map((Plataforms _plataforms) {
                           return DropdownMenuItem<String>(
                             value: _plataforms.documentId(),
                             child: Text(_plataforms.nome),
                           );
                         }).toList(),
-                        onChanged: (String plataforms){
-                          setState(() {                            
-                          _plataforms = plataforms;
-                          _bloc.setPlataforms(plataforms);
+                        onChanged: (String plataforms) {
+                          setState(() {
+                            _plataforms = plataforms;
+                            _bloc.setPlataforms(plataforms);
                           });
-
                         },
-
                       );
                     },
-                    ),
+                  ),
                 ),
               ),
-
-
               Container(height: 6),
               RaisedButton(
                 child: Text("Salvar"),
@@ -184,12 +181,12 @@ class _GamesEditPageState extends State<GamesEditPage> {
   }
 
   Future _inputData(BuildContext context, DateTime initialDate) async {
-    DateTime choosedDate = await showDatePicker (
-    context: context,
-    initialDate: initialDate,
-    firstDate: DateTime(1900), 
-    lastDate: DateTime(2113),);
-
+    DateTime choosedDate = await showDatePicker(
+      context: context,
+      initialDate: initialDate,
+      firstDate: DateTime(1900),
+      lastDate: DateTime(2113),
+    );
 
     if (choosedDate != null) {
       _bloc.setData(choosedDate);
