@@ -61,7 +61,8 @@ class _LogonPageState extends State<LogonPage> {
               child: RaisedButton(
                 onPressed: () async {
                   if (_formKey.currentState.validate()) {
-                    _signInWithEmailAndPassword();
+                    await _signInWithEmailAndPassword();
+                    Navigator.pushReplacementNamed(context, Routes.home);
                   }
                 },
                 child: const Text('Entrar'),
@@ -86,7 +87,7 @@ class _LogonPageState extends State<LogonPage> {
   }
 
   // Example code of how to sign in with email and password.
-  void _signInWithEmailAndPassword() async {
+  _signInWithEmailAndPassword() async {
     FirebaseUser user;
     try {
       user = (await _auth.signInWithEmailAndPassword(
